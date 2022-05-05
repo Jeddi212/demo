@@ -2,6 +2,7 @@ package com.systeric.demo.student;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.Period;
 
 @Entity
 @Table
@@ -19,7 +20,8 @@ public class Student {
     private Long id;
     private String name;
     private String email;
-    private LocalDate dov; // Date of birth
+    private LocalDate dob; // Date of birth
+    @Transient
     private Integer age;
 
     public Student() {
@@ -27,19 +29,17 @@ public class Student {
 
     public Student(Long id) {}
 
-    public Student(Long id, String name, String email, LocalDate dov, Integer age) {
+    public Student(Long id, String name, String email, LocalDate dob) {
         this.id = id;
         this.name = name;
         this.email = email;
-        this.dov = dov;
-        this.age = age;
+        this.dob = dob;
     }
 
-    public Student(String name, String email, LocalDate dov, Integer age) {
+    public Student(String name, String email, LocalDate dob) {
         this.name = name;
         this.email = email;
-        this.dov = dov;
-        this.age = age;
+        this.dob = dob;
     }
 
     public Long getId() {
@@ -66,16 +66,16 @@ public class Student {
         this.email = email;
     }
 
-    public LocalDate getDov() {
-        return dov;
+    public LocalDate getDob() {
+        return dob;
     }
 
-    public void setDov(LocalDate dov) {
-        this.dov = dov;
+    public void setDob(LocalDate dob) {
+        this.dob = dob;
     }
 
     public Integer getAge() {
-        return age;
+        return Period.between(this.dob, LocalDate.now()).getYears();
     }
 
     public void setAge(Integer age) {
@@ -88,7 +88,7 @@ public class Student {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
-                ", dov=" + dov +
+                ", dov=" + dob +
                 ", age=" + age +
                 '}';
     }
