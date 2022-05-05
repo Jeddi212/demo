@@ -1,0 +1,95 @@
+package com.systeric.demo.student;
+
+import javax.persistence.*;
+import java.time.LocalDate;
+
+@Entity
+@Table
+public class Student {
+    @Id
+    @SequenceGenerator(
+            name = "students_sequence",
+            sequenceName = "student_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "students_sequence"
+    )
+    private Long id;
+    private String name;
+    private String email;
+    private LocalDate dov; // Date of birth
+    private Integer age;
+
+    public Student() {
+    }
+
+    public Student(Long id) {}
+
+    public Student(Long id, String name, String email, LocalDate dov, Integer age) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.dov = dov;
+        this.age = age;
+    }
+
+    public Student(String name, String email, LocalDate dov, Integer age) {
+        this.name = name;
+        this.email = email;
+        this.dov = dov;
+        this.age = age;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public LocalDate getDov() {
+        return dov;
+    }
+
+    public void setDov(LocalDate dov) {
+        this.dov = dov;
+    }
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
+    }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", dov=" + dov +
+                ", age=" + age +
+                '}';
+    }
+}
